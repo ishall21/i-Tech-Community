@@ -52,13 +52,13 @@
 <script>
 const $=id=>document.getElementById(id);
 const clean=s=>s.trim().replace(/[^a-zA-Z0-9_.-]/g,'_').slice(0,60);
-function validIPv4(s){const p=s.trim().split('.');return p.length===4&&p.every(x=>/^\\d{1,3}$/.test(x)&&Number(x)>=0&&Number(x)<=255)}
+function validIPv4(s){const p=s.trim().split('.');return p.length===4&&p.every(x=>/^\d{1,3}$/.test(x)&&Number(x)>=0&&Number(x)<=255)}
 function build(){
  const name=clean($('routerName').value)||'i-Tech Community-Dual-WAN';
  const w1=clean($('wan1').value),w2=clean($('wan2').value),lan=clean($('lan').value);
  const gw1=$('gw1').value.trim(),gw2=$('gw2').value.trim(),sub=$('lanSubnet').value.trim();
  const t1=clean($('table1').value),t2=clean($('table2').value),ratio=$('mode').value;
- if(!w1||!w2||!lan||w1===w2||!t1||!t2||t1===t2||!validIPv4(gw1)||!validIPv4(gw2)||!/^\\d{1,3}(\\.\\d{1,3}){3}\\/\\d{1,2}$/.test(sub)){
+ if(!w1||!w2||!lan||w1===w2||!t1||!t2||t1===t2||!validIPv4(gw1)||!validIPv4(gw2)||!/^\d{1,3}(\.\d{1,3}){3}\/\d{1,2}$/.test(sub)){
    $('status').textContent='CHECK INPUTS';$('output').textContent='# Check interface names, unique routing-table names, IPv4 gateways, and LAN CIDR.';return;
  }
  let [a,b]=ratio.split(':').map(Number),total=a+b;
@@ -86,15 +86,15 @@ function build(){
  }else lines.push('# NAT generation disabled by user — configure NAT separately if required.');
  lines.push('');
  c('PCC: mark new LAN connections by connection classifier. Rule order and existing mangle rules matter.');
- lines.push('/ip/firewall/mangle');
+ c('Mangle rules below use full command paths for script import.');
  const dis=$('disabled').checked?' disabled=yes':'';
- lines.push('add chain=prerouting in-interface='+lan+' dst-address-type=!local connection-mark=no-mark per-connection-classifier=both-addresses-and-ports:'+total+'/0 action=mark-connection new-connection-mark=wan1_conn passthrough=yes'+dis+' comment="'+name+' PCC WAN1 bucket 0"');
+ lines.push('/ip/firewall/mangle add chain=prerouting in-interface='+lan+' dst-address-type=!local connection-mark=no-mark per-connection-classifier=both-addresses-and-ports:'+total+'/0 action=mark-connection new-connection-mark=wan1_conn passthrough=yes'+dis+' comment="'+name+' PCC WAN1 bucket 0"');
  for(let i=1;i<total;i++){
    const which=i<a?'wan1_conn':'wan2_conn';
-   lines.push('add chain=prerouting in-interface='+lan+' dst-address-type=!local connection-mark=no-mark per-connection-classifier=both-addresses-and-ports:'+total+'/'+i+' action=mark-connection new-connection-mark='+which+' passthrough=yes'+dis+' comment="'+name+' PCC bucket '+i+'"');
+   lines.push('/ip/firewall/mangle add chain=prerouting in-interface='+lan+' dst-address-type=!local connection-mark=no-mark per-connection-classifier=both-addresses-and-ports:'+total+'/'+i+' action=mark-connection new-connection-mark='+which+' passthrough=yes'+dis+' comment="'+name+' PCC bucket '+i+'"');
  }
- lines.push('add chain=prerouting in-interface='+lan+' connection-mark=wan1_conn action=mark-routing new-routing-mark='+t1+' passthrough=no'+dis+' comment="'+name+' route marked WAN1"');
- lines.push('add chain=prerouting in-interface='+lan+' connection-mark=wan2_conn action=mark-routing new-routing-mark='+t2+' passthrough=no'+dis+' comment="'+name+' route marked WAN2"');
+ lines.push('/ip/firewall/mangle add chain=prerouting in-interface='+lan+' connection-mark=wan1_conn action=mark-routing new-routing-mark='+t1+' passthrough=no'+dis+' comment="'+name+' route marked WAN1"');
+ lines.push('/ip/firewall/mangle add chain=prerouting in-interface='+lan+' connection-mark=wan2_conn action=mark-routing new-routing-mark='+t2+' passthrough=no'+dis+' comment="'+name+' route marked WAN2"');
  lines.push('');
  c('Router-originated traffic is not marked by output chain in this template.');
  if(!$('routerTraffic').checked) lines.push('# If you need router-originated load balancing, design output-chain marking carefully to avoid breaking management, DNS, VPN, and BGP sessions.');
@@ -105,11 +105,11 @@ function build(){
  lines.push('/ip/firewall/mangle/print detail');
  lines.push('/ip/firewall/nat/print detail');
  lines.push('# End of generated template');
- $('output').textContent=lines.join('\\n');$('status').textContent='GENERATED';
+ $('output').textContent=lines.join('\n');$('status').textContent='GENERATED';
 }
 $('generate').addEventListener('click',build);
 $('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('output').textContent);$('status').textContent='COPIED';}catch(e){$('status').textContent='COPY BLOCKED';}});
-$('download').addEventListener('click',()=>{build();const blob=new Blob([$('output').textContent+'\\n'],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(clean($('routerName').value)||'dual-wan')+'.rsc';a.click();URL.revokeObjectURL(a.href);});
+$('download').addEventListener('click',()=>{build();const blob=new Blob([$('output').textContent+'\n'],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(clean($('routerName').value)||'dual-wan')+'.rsc';a.click();URL.revokeObjectURL(a.href);});
 $('reset').addEventListener('click',()=>{ $('routerName').value='i-Tech Community-Dual-WAN';$('mode').value='1:1';$('wan1').value='ether1-WAN1';$('gw1').value='192.0.2.1';$('wan2').value='ether2-WAN2';$('gw2').value='198.51.100.1';$('lan').value='bridge-LAN';$('lanSubnet').value='192.168.88.0/24';$('table1').value='to_WAN1';$('table2').value='to_WAN2';$('nat').checked=true;$('routerTraffic').checked=true;$('comment').checked=true;$('disabled').checked=true;build();});
 $('mode').addEventListener('change',build);build();
 </script>
