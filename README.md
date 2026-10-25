@@ -1,31 +1,27 @@
-# i-Tech Community MikroTik Dual-WAN Load Balancer
+# i-Tech Community MikroTik Triple-WAN Load Balancer
 
-Static GitHub Pages tool that generates a starter MikroTik RouterOS v7 PCC (Per Connection Classifier) dual-WAN load-balancing template.
+A static GitHub Pages generator for a MikroTik RouterOS v7 triple-WAN PCC (Per Connection Classifier) starter configuration.
 
 ## Features
-- Two WAN interface and gateway inputs
-- Equal or weighted PCC ratios (1:1, 2:1, 3:1, 1:2)
-- Separate routing-table names
-- Optional NAT masquerade rules
-- Optional disabled-by-default mangle rules
-- Copy generated commands or download `.rsc`
-- Runs entirely in the browser; no backend
+- Three WAN interfaces and IPv4 gateways
+- Equal and weighted PCC ratios: 1:1:1, 2:1:1, 1:2:1, 1:1:2, 2:2:1, and 3:2:1
+- Separate policy routing tables
+- Optional masquerade rules for all three WANs
+- Disabled-by-default PCC mangle rules option
+- Copy generated script or download an `.rsc` file
+- Runs entirely in the browser
 
-## Publish to GitHub Pages
-1. Create a repository, e.g. `i-tech-community-dual-wan-load-balance`.
+## Publish on GitHub Pages
+1. Create a repository named `i-tech-community-triple-wan-load-balance`.
 2. Upload `index.html` and `README.md` to the repository root.
-3. Open **Settings → Pages**.
-4. Select **Deploy from a branch**, branch `main`, folder `/ (root)`, and save.
-5. Wait for GitHub Pages to publish.
+3. Go to **Settings → Pages**.
+4. Choose **Deploy from a branch**, select `main` and `/(root)`, then save.
+5. Wait for the GitHub Pages deployment to finish.
 
-If your GitHub username is `ishall21`, the expected URL is:
-`https://ishall21.github.io/i-tech-community-dual-wan-load-balance/`
+Expected URL for GitHub user `ishall21`:
+`https://ishall21.github.io/i-tech-community-triple-wan-load-balance/`
 
-## Critical deployment notes
-- Gateway values `192.0.2.1` and `198.51.100.1` are documentation examples only. Replace them with your actual gateways.
-- The generated script is a starter template, not a tested drop-in config. Existing routing tables, routes, mangle rules, NAT, FastTrack, DHCP/PPPoE WANs, VPNs, BGP sessions, and connection tracking can affect the design.
-- `check-gateway=ping` only checks reachability of the configured gateway; it does not guarantee end-to-end internet health.
-- Review PCC bucket mapping for the selected ratio before enabling. Existing connections may behave differently after policy changes.
-- Back up the router, test on a lab device, and validate against your RouterOS v7 release before production use.
+## Important
+The prefilled gateways (192.0.2.1, 198.51.100.1, 203.0.113.1) are documentation-only example addresses. Replace them with your real gateways. This is a starter template, not a verified drop-in config. Review duplicate routes/tables, DHCP/PPPoE WAN behavior, mangle rule order, FastTrack, NAT, VPN/BGP exceptions, and end-to-end failover monitoring. Back up and test on a lab router before production use.
 
 Official documentation: https://help.mikrotik.com/docs/
