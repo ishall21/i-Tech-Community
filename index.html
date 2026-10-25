@@ -1,109 +1,95 @@
 <!doctype html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#09111f">
-<meta name="description" content="i-Tech Community MikroTik RouterOS v7 triple-WAN PCC load-balancing script generator.">
-<title>i-Tech Community | Triple-WAN Load Balancer</title>
+<meta name="description" content="i-Tech Community MikroTik RouterOS v7 four-WAN PCC rules generator.">
+<title>i-Tech Community | 4-WAN Routing Method Selector</title>
 <style>
-:root{color-scheme:dark;--bg:#09111f;--panel:#111c2e;--line:#283951;--text:#e8effa;--muted:#9aabc1;--blue:#62b0ff;--cyan:#49dfc5;--orange:#ffca83}
+:root{color-scheme:dark;--bg:#09111f;--panel:#111c2e;--line:#283951;--text:#e8effa;--muted:#9aabc1;--blue:#62b0ff;--cyan:#49dfc5}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0%,#173454 0,transparent 35%),var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:1260px;margin:auto;padding:25px 18px 55px}.top{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-bottom:20px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px}.logo{height:44px;width:44px;border-radius:13px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;color:#061321;font-weight:900}.eyebrow{font-size:11px;color:var(--cyan);font-weight:800;letter-spacing:.15em;text-transform:uppercase}.brand h1{margin:0;font-size:20px}.tag{border:1px solid var(--line);border-radius:99px;padding:7px 11px;color:var(--muted);font-size:12px}.hero{padding:32px 0 24px;max-width:850px}.pill{display:inline-block;border:1px solid #28605e;background:#0b292f;color:#9af2df;border-radius:99px;padding:5px 10px;font-size:11px;font-weight:800}.hero h2{font-size:clamp(30px,5vw,47px);line-height:1.1;letter-spacing:-.04em;margin:13px 0}.hero p{margin:0;color:var(--muted);font-size:16px}.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}.panel{border:1px solid var(--line);border-radius:18px;padding:21px;background:linear-gradient(180deg,#121e31f5,#0c1728f5);box-shadow:0 18px 50px #0002}.panel h3{font-size:18px;margin:0 0 3px}.sub{font-size:12px;color:var(--muted);margin:0 0 18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:12px;font-weight:700;color:#c5d2e4}input,select{width:100%;background:#081321;border:1px solid #30425d;border-radius:9px;padding:10px 11px;color:var(--text);font:inherit;min-width:0}input:focus,select:focus{outline:2px solid #62b0ff40;border-color:var(--blue)}.section{border-top:1px solid var(--line);padding-top:16px;margin-top:18px}.section h4{margin:0 0 12px;font-size:13px;color:var(--cyan);letter-spacing:.06em;text-transform:uppercase}.checkrow{display:flex;align-items:center;gap:9px;margin:10px 0;color:#c9d6e9;font-size:12px}.checkrow input{width:auto;accent-color:var(--cyan)}.hint{font-size:11px;color:var(--muted)}.buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:19px}.btn{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:#1a2a42;color:var(--text);padding:10px 13px;font-size:12px;font-weight:800}.btn.primary{border:0;color:#061321;background:linear-gradient(135deg,var(--blue),var(--cyan))}.btn:hover{filter:brightness(1.1)}.status{font-size:11px;color:var(--cyan);font-weight:800}.codehead{display:flex;justify-content:space-between;gap:10px;align-items:center}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.tabs span{font-size:11px;color:var(--muted);padding:5px 8px;border:1px solid var(--line);border-radius:7px}pre{white-space:pre-wrap;overflow-wrap:anywhere;overflow:auto;max-height:660px;min-height:480px;margin:0;padding:15px;border-radius:12px;background:#050b13;border:1px solid #203149;color:#baf5d5;font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace}.warning{border:1px solid #6c4b26;background:#2a2116;color:#ffdaa8;padding:13px;border-radius:10px;font-size:12px;margin-top:15px}.notice{font-size:12px;color:var(--muted);margin-top:12px}.footer{text-align:center;color:var(--muted);font-size:12px;padding-top:25px}.footer a{color:var(--muted)}@media(max-width:900px){.layout{grid-template-columns:1fr}.tag{display:none}}@media(max-width:500px){.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.wrap{padding:17px 11px 35px}.panel{padding:15px}}
 </style></head>
 <body><div class="wrap">
-<header class="top"><div class="brand"><div class="logo">iTC</div><div><div class="eyebrow">Network Engineering Tools</div><h1>Triple-WAN Load Balancer</h1></div></div><div class="tag">MikroTik RouterOS v7 · PCC</div></header>
-<section class="hero"><span class="pill">● THREE-UPLINK PCC GENERATOR</span><h2>Balance three WANs.<br>Distribute connections intelligently.</h2><p>Generate a configurable MikroTik RouterOS v7 PCC template for three internet links. Set interfaces, gateways, LAN, and weighted connection distribution, then review and export the script.</p></section>
+<header class="top"><div class="brand"><div class="logo">iTC</div><div><div class="eyebrow">Network Engineering Tools</div><h1>4-WAN Routing Method Selector</h1></div></div><div class="tag">MikroTik RouterOS v7</div></header>
+<section class="hero"><span class="pill">● FOUR-WAN ROUTING TOOL</span><h2>Choose your routing method.</h2><p>Select PCC for connection-based load balancing, or Recursive Routing for probe-based WAN failover. Configure four uplinks and generate a RouterOS v7 script for review.</p></section>
 <main class="layout">
-<section class="panel">
-<h3>WAN & LAN configuration</h3><p class="sub">Enter actual interface names and reachable gateway addresses.</p>
+<section class="panel"><h3>WAN, LAN & routing settings</h3><p class="sub">Enter actual interface names and gateway IPv4 addresses. Recursive probes must be reachable public IPs that respond to ICMP.</p>
 <div class="grid">
-<div class="field full"><label for="scriptName">Script name</label><input id="scriptName" value="i-Tech-Community-Triple-WAN" maxlength="60"></div>
-<div class="field full"><label for="ratio">PCC connection ratio</label><select id="ratio"><option value="1:1:1">Equal distribution — 1:1:1</option><option value="2:1:1">WAN1 weighted — 2:1:1</option><option value="1:2:1">WAN2 weighted — 1:2:1</option><option value="1:1:2">WAN3 weighted — 1:1:2</option><option value="2:2:1">WAN1 + WAN2 weighted — 2:2:1</option><option value="3:2:1">WAN1/WAN2/WAN3 — 3:2:1</option></select></div>
+<div class="field full"><label for="scriptName">Script name</label><input id="scriptName" value="i-Tech-Community-4WAN-PCC" maxlength="60"></div>
+<div class="field full"><label for="method">Configuration method</label><select id="method"><option value="pcc">PCC Method — load balancing</option><option value="recursive">Recursive Method — WAN failover</option></select><p class="hint">PCC distributes new connections across WANs. Recursive routing monitors probe reachability and switches to a lower-priority route when a probe fails.</p></div>
+<div class="field full" id="ratioField"><label for="ratio">PCC ratio / bucket distribution</label><select id="ratio"><option value="1:1:1:1">Equal — 1:1:1:1 (4 buckets)</option><option value="2:1:1:1">WAN1 weighted — 2:1:1:1 (5 buckets)</option><option value="1:2:1:1">WAN2 weighted — 1:2:1:1 (5 buckets)</option><option value="1:1:2:1">WAN3 weighted — 1:1:2:1 (5 buckets)</option><option value="1:1:1:2">WAN4 weighted — 1:1:1:2 (5 buckets)</option><option value="2:2:1:1">WAN1/WAN2 weighted — 2:2:1:1 (6 buckets)</option><option value="2:2:2:1">WAN1/WAN2/WAN3 weighted — 2:2:2:1 (7 buckets)</option><option value="3:2:1:1">WAN1/WAN2/WAN3/WAN4 — 3:2:1:1 (7 buckets)</option></select></div>
 <div class="field"><label for="wan1">WAN1 interface</label><input id="wan1" value="ether1-WAN1"></div><div class="field"><label for="gw1">WAN1 gateway IPv4</label><input id="gw1" value="192.0.2.1"></div>
 <div class="field"><label for="wan2">WAN2 interface</label><input id="wan2" value="ether2-WAN2"></div><div class="field"><label for="gw2">WAN2 gateway IPv4</label><input id="gw2" value="198.51.100.1"></div>
 <div class="field"><label for="wan3">WAN3 interface</label><input id="wan3" value="ether3-WAN3"></div><div class="field"><label for="gw3">WAN3 gateway IPv4</label><input id="gw3" value="203.0.113.1"></div>
+<div class="field"><label for="wan4">WAN4 interface</label><input id="wan4" value="ether4-WAN4"></div><div class="field"><label for="gw4">WAN4 gateway IPv4</label><input id="gw4" value="203.0.113.2"></div>
+<div class="field"><label for="probe1">WAN1 recursive probe IP</label><input id="probe1" value="1.1.1.1"></div><div class="field"><label for="probe2">WAN2 recursive probe IP</label><input id="probe2" value="8.8.8.8"></div>
+<div class="field"><label for="probe3">WAN3 recursive probe IP</label><input id="probe3" value="9.9.9.9"></div><div class="field"><label for="probe4">WAN4 recursive probe IP</label><input id="probe4" value="208.67.222.222"></div>
 <div class="field"><label for="lan">LAN / bridge interface</label><input id="lan" value="bridge-LAN"></div><div class="field"><label for="subnet">LAN subnet (CIDR)</label><input id="subnet" value="192.168.88.0/24"></div>
 <div class="field"><label for="table1">WAN1 routing table</label><input id="table1" value="to_WAN1"></div><div class="field"><label for="table2">WAN2 routing table</label><input id="table2" value="to_WAN2"></div>
-<div class="field full"><label for="table3">WAN3 routing table</label><input id="table3" value="to_WAN3"></div>
+<div class="field"><label for="table3">WAN3 routing table (PCC)</label><input id="table3" value="to_WAN3"></div><div class="field"><label for="table4">WAN4 routing table (PCC)</label><input id="table4" value="to_WAN4"></div>
 </div>
-<div class="section"><h4>Options</h4>
-<label class="checkrow"><input type="checkbox" id="nat" checked> Generate masquerade NAT rules for all three WANs</label>
+<div class="section"><h4>Rule options</h4>
+<label class="checkrow"><input type="checkbox" id="nat" checked> Include masquerade NAT rules for all four WANs</label>
 <label class="checkrow"><input type="checkbox" id="disabled" checked> Create PCC mangle rules disabled initially</label>
+<label class="checkrow"><input type="checkbox" id="routes" checked> Include policy-table default routes and main-table distance routes</label>
 <label class="checkrow"><input type="checkbox" id="comments" checked> Include comments and validation commands</label>
-<p class="hint">PCC distributes connections, not individual packets. Actual throughput per WAN depends on the selected ratio and the mix of traffic.</p></div>
-<div class="buttons"><button class="btn primary" id="generate">Generate script</button><button class="btn" id="copy">Copy script</button><button class="btn" id="download">Download .rsc</button><button class="btn" id="reset">Reset</button></div>
-<div class="warning"><strong>Production caution:</strong> Gateway addresses shown are documentation examples only. The generated script is a template, not a verified drop-in config. Check existing routes/tables, DHCP or PPPoE WANs, FastTrack, firewall rule order, VPN/BGP traffic, and end-to-end failover monitoring before deployment.</div>
-</section>
-<section class="panel">
-<div class="codehead"><div><h3>Generated RouterOS script</h3><p class="sub" style="margin:4px 0 0">Review before importing into your router.</p></div><span class="status" id="status">READY</span></div>
-<div class="tabs"><span>RouterOS v7</span><span>3 WANs</span><span>Weighted PCC</span><span>RSC export</span></div>
-<pre id="output" aria-live="polite"></pre><p class="notice">This tool runs locally in your browser. It does not connect to or test your MikroTik router.</p>
-</section></main>
-<div class="footer">i-Tech Community · Independent community tool, not affiliated with MikroTik. <a href="https://help.mikrotik.com/docs/" target="_blank" rel="noopener">Official RouterOS documentation</a></div>
+<p class="hint">PCC distributes connections, not individual packets. A ratio sets bucket assignment proportions; it does not guarantee identical throughput or automatic failover.</p>
 </div>
+<div class="buttons"><button class="btn primary" id="generate">Generate configuration</button><button class="btn" id="copy">Copy script</button><button class="btn" id="download">Download .rsc</button><button class="btn" id="reset">Reset</button></div>
+<div class="warning"><strong>Production warning:</strong> Example gateways are documentation-only addresses. Replace them with real gateways. The generated output is a template; verify rule order, routing tables, gateway reachability, FastTrack, existing mangle/NAT rules, DHCP/PPPoE behavior, VPN/BGP exceptions, and failover health checks before deployment.</div>
+</section>
+<section class="panel"><div class="codehead"><div><h3>Generated RouterOS script</h3><p class="sub" style="margin:4px 0 0">Auto-generated on page load and refreshed as you change settings.</p></div><span class="status" id="status">READY</span></div><div class="tabs"><span>RouterOS v7</span><span>4 WANs</span><span id="methodBadge">PCC load balancing</span><span>RSC export</span></div><pre id="output" aria-live="polite"></pre><p class="notice">The tool runs locally in your browser. It does not connect to or validate your router.</p></section>
+</main><div class="footer">i-Tech Community · Independent community tool, not affiliated with MikroTik. <a href="https://help.mikrotik.com/docs/" target="_blank" rel="noopener">Official RouterOS documentation</a></div></div>
 <script>
-const $ = id => document.getElementById(id);
-const clean = s => s.trim().replace(/[^a-zA-Z0-9_.-]/g, "_").slice(0,60);
-function validIPv4(s) {
-  const parts=s.trim().split(".");
-  return parts.length===4 && parts.every(p=>/^\d{1,3}$/.test(p) && Number(p)>=0 && Number(p)<=255);
+const $=id=>document.getElementById(id);
+const clean=s=>s.trim().replace(/[^a-zA-Z0-9_.-]/g,"_").slice(0,60);
+function validIPv4(s){const p=s.trim().split(".");return p.length===4&&p.every(x=>/^\d{1,3}$/.test(x)&&Number(x)>=0&&Number(x)<=255)}
+function validCIDR(s){const m=s.trim().match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\/(\d{1,2})$/);return !!m&&m.slice(1,5).every(x=>Number(x)>=0&&Number(x)<=255)&&Number(m[5])>=0&&Number(m[5])<=32}
+function build(){
+ const method=$("method").value;
+ $("ratioField").style.display=method==="pcc"?"flex":"none";
+ $("methodBadge").textContent=method==="pcc"?"PCC load balancing":"Recursive WAN failover";
+ const name=clean($("scriptName").value)||"i-Tech-Community-4WAN";
+ const wan=[1,2,3,4].map(i=>clean($("wan"+i).value));
+ const gw=[1,2,3,4].map(i=>$("gw"+i).value.trim());
+ const probes=[1,2,3,4].map(i=>$("probe"+i).value.trim());
+ const tables=[1,2,3,4].map(i=>clean($("table"+i).value));
+ const lan=clean($("lan").value),subnet=$("subnet").value.trim();
+ if(wan.some(x=>!x)||new Set(wan).size!==4||gw.some(x=>!validIPv4(x))||!lan||!validCIDR(subnet)){
+  $("status").textContent="CHECK INPUTS";$("output").textContent="# Check unique WAN interfaces, valid gateway IPv4 addresses, LAN interface, and LAN CIDR.";return false;
+ }
+ if(method==="pcc"&&(tables.some(x=>!x)||new Set(tables).size!==4)){
+  $("status").textContent="CHECK INPUTS";$("output").textContent="# Enter four unique routing table names for PCC.";return false;
+ }
+ if(method==="recursive"&&(probes.some(x=>!validIPv4(x))||new Set(probes).size!==4)){
+  $("status").textContent="CHECK PROBES";$("output").textContent="# Enter four unique valid IPv4 probe addresses.";return false;
+ }
+ const disabled=$("disabled").checked?" disabled=yes":"", comments=$("comments").checked, lines=[];
+ const c=s=>{if(comments)lines.push("# "+s)};
+ c(name+" — MikroTik RouterOS v7 four-WAN "+(method==="pcc"?"PCC load-balancing":"recursive failover")+" template");
+ c("Review, adapt and test before production. Back up current configuration first.");lines.push("");
+ if($("nat").checked){c("Optional source NAT for each WAN.");wan.forEach((w,i)=>lines.push("/ip/firewall/nat add chain=srcnat out-interface="+w+" action=masquerade comment=\""+name+" WAN"+(i+1)+" NAT\""));lines.push("");}
+ else {c("NAT rules omitted by option.");lines.push("");}
+ if(method==="pcc"){
+  c("Create policy routing tables; do not duplicate existing table entries.");tables.forEach((t,i)=>lines.push("/routing/table add name="+t+" fib comment=\""+name+" WAN"+(i+1)+" table\""));lines.push("");
+  if($("routes").checked){c("Policy-table defaults. Gateways must be reachable in main; adapt for DHCP/PPPoE WANs.");tables.forEach((t,i)=>lines.push("/ip/route add dst-address=0.0.0.0/0 gateway="+gw[i]+"@main routing-table="+t+" check-gateway=ping comment=\""+name+" WAN"+(i+1)+" policy route\""));lines.push("");c("Main-table distance routes are basic gateway checks, not end-to-end recursive monitoring.");tables.forEach((t,i)=>lines.push("/ip/route add dst-address=0.0.0.0/0 gateway="+gw[i]+" distance="+(i+1)+" check-gateway=ping comment=\""+name+" WAN"+(i+1)+" main route\""));lines.push("");}
+  const weights=$("ratio").value.split(":").map(Number),buckets=[];weights.forEach((weight,i)=>{for(let j=0;j<weight;j++)buckets.push(i+1)});
+  c("PCC ratio "+weights.join(":")+"; classifier bucket count = "+buckets.length+". Rules are connection-based.");
+  buckets.forEach((wanNum,bucket)=>lines.push("/ip/firewall/mangle add chain=prerouting in-interface="+lan+" dst-address-type=!local connection-mark=no-mark per-connection-classifier=both-addresses-and-ports:"+buckets.length+"/"+bucket+" action=mark-connection new-connection-mark=wan"+wanNum+"_conn passthrough=yes"+disabled+" comment=\""+name+" PCC bucket "+bucket+" to WAN"+wanNum+"\""));lines.push("");
+  c("Route marked LAN connections into matching policy tables.");[1,2,3,4].forEach(i=>lines.push("/ip/firewall/mangle add chain=prerouting in-interface="+lan+" connection-mark=wan"+i+"_conn action=mark-routing new-routing-mark="+tables[i-1]+" passthrough=no"+disabled+" comment=\""+name+" route WAN"+i+"\""));
+ } else {
+  c("Recursive reachability checks: each probe host route is pinned to its WAN gateway.");
+  probes.forEach((probe,i)=>lines.push("/ip/route add dst-address="+probe+"/32 gateway="+gw[i]+" scope=10 comment=\""+name+" WAN"+(i+1)+" probe host route\""));lines.push("");
+  c("Recursive default routes. Lowest distance is preferred; route is eligible only while its probe is reachable.");
+  probes.forEach((probe,i)=>lines.push("/ip/route add dst-address=0.0.0.0/0 gateway="+probe+" distance="+(i+1)+" target-scope=11 check-gateway=ping comment=\""+name+" WAN"+(i+1)+" recursive default\""));
+  lines.push("");c("Recursive mode is failover, not PCC load balancing. Probe IPs should be stable ICMP-responsive targets; validate each route and probe independently.");
+ }
+ lines.push("");c("Validation commands");lines.push("/ip/route/print detail","/ip/firewall/nat/print detail");if(method==="pcc")lines.push("/routing/table/print detail","/ip/firewall/mangle/print detail");lines.push("# End of generated template");
+ $("output").textContent=lines.join("\n");$("status").textContent="AUTO-DISPLAYED";return true;
 }
-function validCIDR(s) {
-  const m=s.trim().match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\\/(\d{1,2})$/);
-  return !!m && m.slice(1,5).every(p=>Number(p)>=0&&Number(p)<=255) && Number(m[5])>=0&&Number(m[5])<=32;
-}
-function build() {
-  const name=clean($('scriptName').value)||'i-Tech-Community-Triple-WAN';
-  const wan=[clean($('wan1').value),clean($('wan2').value),clean($('wan3').value)];
-  const gw=[$('gw1').value.trim(),$('gw2').value.trim(),$('gw3').value.trim()];
-  const lan=clean($('lan').value), subnet=$('subnet').value.trim();
-  const tables=[clean($('table1').value),clean($('table2').value),clean($('table3').value)];
-  if(wan.some(x=>!x)||new Set(wan).size!==3||!lan||gw.some(x=>!validIPv4(x))||!validCIDR(subnet)||tables.some(x=>!x)||new Set(tables).size!==3) {
-    $('status').textContent='CHECK INPUTS';
-    $('output').textContent='# Check that WAN interfaces are unique, gateways are valid IPv4 addresses, LAN subnet is valid CIDR, and routing table names are unique.';
-    return;
-  }
-  const weights=$('ratio').value.split(':').map(Number);
-  const buckets=[];
-  weights.forEach((weight,idx)=>{for(let i=0;i<weight;i++)buckets.push(idx+1);});
-  const disabled=$('disabled').checked?' disabled=yes':'';
-  const comments=$('comments').checked;
-  const lines=[];
-  const c=s=>{if(comments)lines.push('# '+s);};
-  c(name+' — MikroTik RouterOS v7 triple-WAN PCC template');
-  c('Review and test before production use. Back up the current router configuration.');
-  lines.push('');
-  c('Create policy routing tables. Remove or adjust duplicate entries if tables already exist.');
-  tables.forEach((t,i)=>lines.push('/routing/table add name='+t+' fib comment="'+name+' WAN'+(i+1)+' table"'));
-  lines.push('');
-  c('Policy default routes. Gateway values must be reachable from main; validate behavior for your WAN type.');
-  tables.forEach((t,i)=>lines.push('/ip/route add dst-address=0.0.0.0/0 gateway='+gw[i]+'@main routing-table='+t+' check-gateway=ping comment="'+name+' WAN'+(i+1)+' policy route"'));
-  lines.push('');
-  c('Main-table distance-based failover example; this is not end-to-end internet health checking.');
-  tables.forEach((t,i)=>lines.push('/ip/route add dst-address=0.0.0.0/0 gateway='+gw[i]+' distance='+(i+1)+' check-gateway=ping comment="'+name+' WAN'+(i+1)+' main route"'));
-  lines.push('');
-  c('Optional NAT rules for each WAN egress interface.');
-  if($('nat').checked) wan.forEach((w,i)=>lines.push('/ip/firewall/nat add chain=srcnat out-interface='+w+' action=masquerade comment="'+name+' WAN'+(i+1)+' NAT"'));
-  else lines.push('# NAT generation disabled. Configure source NAT separately if required.');
-  lines.push('');
-  c('PCC connection buckets. Weighted mapping follows the selected ratio: '+weights.join(':')+'.');
-  buckets.forEach((wanNum,bucket)=>lines.push('/ip/firewall/mangle add chain=prerouting in-interface='+lan+' dst-address-type=!local connection-mark=no-mark per-connection-classifier=both-addresses-and-ports:'+buckets.length+'/'+bucket+' action=mark-connection new-connection-mark=wan'+wanNum+'_conn passthrough=yes'+disabled+' comment="'+name+' PCC bucket '+bucket+' -> WAN'+wanNum+'"'));
-  lines.push('');
-  c('Route packets based on connection marks. These rules must be reviewed against existing mangle policy.');
-  [1,2,3].forEach(i=>lines.push('/ip/firewall/mangle add chain=prerouting in-interface='+lan+' connection-mark=wan'+i+'_conn action=mark-routing new-routing-mark='+tables[i-1]+' passthrough=no'+disabled+' comment="'+name+' route marked WAN'+i+'"'));
-  lines.push('');
-  c('Validation commands');
-  lines.push('/routing/table/print detail');
-  lines.push('/ip/route/print detail');
-  lines.push('/ip/firewall/mangle/print detail');
-  lines.push('/ip/firewall/nat/print detail');
-  lines.push('# End of generated template');
-  $('output').textContent=lines.join('\n');
-  $('status').textContent='GENERATED';
-}
-$('generate').addEventListener('click',build);
-$('ratio').addEventListener('change',build);
-$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('output').textContent);$('status').textContent='COPIED';}catch(e){$('status').textContent='COPY BLOCKED';}});
-$('download').addEventListener('click',()=>{build();const blob=new Blob([$('output').textContent+'\n'],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(clean($('scriptName').value)||'triple-wan')+'.rsc';a.click();URL.revokeObjectURL(a.href);});
-$('reset').addEventListener('click',()=>{ $('scriptName').value='i-Tech-Community-Triple-WAN';$('ratio').value='1:1:1';$('wan1').value='ether1-WAN1';$('gw1').value='192.0.2.1';$('wan2').value='ether2-WAN2';$('gw2').value='198.51.100.1';$('wan3').value='ether3-WAN3';$('gw3').value='203.0.113.1';$('lan').value='bridge-LAN';$('subnet').value='192.168.88.0/24';$('table1').value='to_WAN1';$('table2').value='to_WAN2';$('table3').value='to_WAN3';$('nat').checked=true;$('disabled').checked=true;$('comments').checked=true;build();});
-build();
+// Keep the script preview synchronized with every configuration control.
+document.querySelectorAll("input, select").forEach(el=>{el.addEventListener("input",build);el.addEventListener("change",build)});
+$("generate").addEventListener("click",()=>{if(build())$("status").textContent="GENERATED"});
+$("copy").addEventListener("click",async()=>{if(!build())return;try{await navigator.clipboard.writeText($("output").textContent);$("status").textContent="COPIED"}catch(e){$("status").textContent="COPY BLOCKED — use Download .rsc"}});
+$("download").addEventListener("click",()=>{if(!build())return;const blob=new Blob([$("output").textContent+"\n"],{type:"text/plain"});const a=document.createElement("a");const url=URL.createObjectURL(blob);a.href=url;a.download=(clean($("scriptName").value)||"four-wan-pcc")+".rsc";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+$("reset").addEventListener("click",()=>{location.reload()});build();
 </script></body></html>
